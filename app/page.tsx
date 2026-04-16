@@ -10,7 +10,6 @@ import { StoryBible } from "@/components/views/story-bible";
 import { OutlineView } from "@/components/views/outline-view";
 import { ResearchView } from "@/components/views/research-view";
 import { AnalyticsView } from "@/components/views/analytics-view";
-import { SettingsView } from "@/components/views/settings-view";
 import { NewProjectModal } from "@/components/modals/new-project-modal";
 import { ExportModal } from "@/components/modals/export-modal";
 import { useAppStore } from "@/lib/store";
@@ -18,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 export default function NovelStudio() {
   const {
-    currentView,
+    activeView,
     leftSidebarOpen,
     rightSidebarOpen,
   } = useAppStore();
@@ -33,12 +32,12 @@ export default function NovelStudio() {
   };
 
   const renderView = () => {
-    switch (currentView) {
+    switch (activeView) {
       case "dashboard":
         return <Dashboard onNewProject={() => setNewProjectOpen(true)} />;
-      case "manuscript":
+      case "editor":
         return <ManuscriptEditor />;
-      case "bible":
+      case "storyBible":
         return <StoryBible />;
       case "outline":
         return <OutlineView />;
@@ -46,8 +45,6 @@ export default function NovelStudio() {
         return <ResearchView />;
       case "analytics":
         return <AnalyticsView />;
-      case "settings":
-        return <SettingsView />;
       default:
         return <Dashboard onNewProject={() => setNewProjectOpen(true)} />;
     }
